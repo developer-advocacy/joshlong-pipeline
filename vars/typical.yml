@@ -2,7 +2,7 @@
 # api.cf.applicationconcierge.com). no secrets here: bin/deploy.sh adds those from the environment.
 
 # where the apps go. bin/deploy.sh targets these; it doesn't create them.
-org: developer_advocacy
+org: developer-advocacy
 space: production
 
 registry: us-docker.pkg.dev/joshlong/developer-advocacy-artifact-registry

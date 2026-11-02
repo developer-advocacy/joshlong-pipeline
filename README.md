@@ -6,7 +6,7 @@ Today that is two apps:
 - `joshlong-site` (from [`joshlong-site`](https://github.com/developer-advocacy/joshlong-site)), the Vue site at `https://joshlong.com`.
 - `joshlong-api` (from [`joshlong-api`](https://github.com/developer-advocacy/joshlong-api)), the GraphQL API behind it at `https://api.joshlong.com`.
 
-The foundation is the typical one from `~/code/application-concierge/cloudfoundry-platform-installer` (`api.cf.applicationconcierge.com`), and the apps live in the org `developer_advocacy`, space `production`.
+The foundation is the typical one from `~/code/application-concierge/cloudfoundry-platform-installer` (`api.cf.applicationconcierge.com`), and the apps live in the org `developer-advocacy`, space `production`.
 
 ## How a change gets deployed
 
@@ -52,7 +52,7 @@ bin/deploy.sh                      # every app, or name some: bin/deploy.sh josh
 
 | Secret | On | Is | Kept in Bitwarden as |
 |---|---|---|---|
-| `CF_USERNAME`, `CF_PASSWORD` | this repository | the CF user `joshlong-pipeline`, SpaceDeveloper in `developer_advocacy` / `production` and nothing else | `joshlong-cf-pipeline-user` |
+| `CF_USERNAME`, `CF_PASSWORD` | this repository | the CF user `joshlong-pipeline`, SpaceDeveloper in `developer-advocacy` / `production` and nothing else | `joshlong-cf-pipeline-user` |
 | `CF_DOCKER_PASSWORD` | this repository | a JSON key of the service account `joshlong-cf-puller@joshlong.iam.gserviceaccount.com`, which can only read `developer-advocacy-artifact-registry` | `joshlong-cf-image-puller-key` (notes) |
 | `JOSHLONG_DB_HOST`, `JOSHLONG_DB_SCHEMA`, `JOSHLONG_DB_USERNAME`, `JOSHLONG_DB_PASSWORD` | the `developer-advocacy` org | the api's PostgreSQL, on Crunchy Bridge | `joshlong-production-secrets` (fields) |
 | `BOOTIFUL_YOUTUBE_API_KEY`, `BOOTIFUL_PROMOTION_PLAYLIST_IDS` | the `developer-advocacy` org | the api's YouTube Data API key, and the playlists it promotes | `joshlong-production-secrets` (fields) |
