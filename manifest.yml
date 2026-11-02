@@ -13,6 +13,8 @@ applications:
     memory: 256M
     disk_quota: 1G
     routes:
+      - route: ((domain))
+      - route: www.((domain))
       - route: ((site-host)).((apps-domain))
     health-check-type: http
     health-check-http-endpoint: /
@@ -27,6 +29,7 @@ applications:
     memory: 1G
     disk_quota: 4G
     routes:
+      - route: api.((domain))
       - route: ((api-host)).((apps-domain))
     health-check-type: http
     health-check-http-endpoint: /actuator/health/readiness
