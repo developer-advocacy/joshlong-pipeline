@@ -1,0 +1,53 @@
+---
+# every joshlong.com app on cloud foundry, from the container images their own repositories build.
+# see README.md. ((name)) comes from a vars file: vars/<foundation>.yml for names and hosts, and
+# the secrets and digests bin/deploy.sh writes to a temporary one. nothing secret belongs here.
+applications:
+
+  # the vue spa, served by nginx. the api's address is baked into the bundle when it's built.
+  - name: joshlong-site
+    docker:
+      image: ((registry))/joshlong-site@((joshlong-site-digest))
+      username: _json_key
+    instances: 1
+    memory: 256M
+    disk_quota: 1G
+    routes:
+      - route: ((site-host)).((apps-domain))
+    health-check-type: http
+    health-check-http-endpoint: /
+
+  # the graphql api behind the site: a graalvm native image. it clones the content repository and
+  # indexes it with lucene, on local disk, after it starts, and keeps the youtube data in postgres.
+  - name: joshlong-api
+    docker:
+      image: ((registry))/joshlong-api@((joshlong-api-digest))
+      username: _json_key
+    instances: 1
+    memory: 1G
+    disk_quota: 4G
+    routes:
+      - route: ((api-host)).((apps-domain))
+    health-check-type: http
+    health-check-http-endpoint: /actuator/health/readiness
+    timeout: 180
+    env:
+      LANG: en_US.UTF-8
+      SERVER_PORT: "8080"
+      BLOG_RESET_ON_REBUILD: "true"
+      BLOG_API_SERVER_URI: ((api-server-uri))
+      BOOTIFUL_BATCH_RUN: "false"
+      SPRING_DATASOURCE_URL: jdbc:postgresql://((JOSHLONG_DB_HOST))/((JOSHLONG_DB_SCHEMA))
+      SPRING_DATASOURCE_USERNAME: ((JOSHLONG_DB_USERNAME))
+      SPRING_DATASOURCE_PASSWORD: ((JOSHLONG_DB_PASSWORD))
+      BOOTIFUL_YOUTUBE_API_KEY: ((BOOTIFUL_YOUTUBE_API_KEY))
+      BOOTIFUL_PROMOTION_PLAYLIST_IDS: ((BOOTIFUL_PROMOTION_PLAYLIST_IDS))
+      BLOG_INDEX_REBUILD_KEY: ((BLOG_INDEX_REBUILD_KEY))
+      # empty on GKE too: there's no rabbitmq and no twitter account behind these any more.
+      SPRING_RABBITMQ_HOST: ""
+      SPRING_RABBITMQ_PORT: ""
+      SPRING_RABBITMQ_USERNAME: ""
+      SPRING_RABBITMQ_PASSWORD: ""
+      SPRING_RABBITMQ_VIRTUAL_HOST: ""
+      BOOTIFUL_TWITTER_CLIENT_ID: ""
+      BOOTIFUL_TWITTER_CLIENT_SECRET: ""

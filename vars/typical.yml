@@ -1,0 +1,15 @@
+# the names and hosts of joshlong.com on the typical foundation (cf/typical.env,
+# api.cf.applicationconcierge.com). no secrets here: bin/deploy.sh adds those from the environment.
+
+# where the apps go. bin/deploy.sh targets these; it doesn't create them.
+org: developer_advocacy
+space: production
+
+registry: us-docker.pkg.dev/joshlong/developer-advocacy-artifact-registry
+domain: joshlong.com
+apps-domain: apps.applicationconcierge.com
+site-host: joshlong-site
+api-host: joshlong-api
+
+# where the api tells the world it is, in the links it hands out.
+api-server-uri: https://api.joshlong.com
