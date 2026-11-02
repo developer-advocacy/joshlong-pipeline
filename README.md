@@ -3,7 +3,7 @@
 Deploys joshlong.com's applications to Cloud Foundry from the container images built by their own repositories.
 Today that is two apps:
 
-- `joshlong-site` (from [`joshlong-site`](https://github.com/developer-advocacy/joshlong-site)), the Vue site at `https://joshlong.com`.
+- `joshlong-site` (from [`joshlong-site`](https://github.com/developer-advocacy/joshlong-site)), the Nuxt site at `https://joshlong.com`, rendered on the server.
 - `joshlong-api` (from [`joshlong-api`](https://github.com/developer-advocacy/joshlong-api)), the GraphQL API behind it at `https://api.joshlong.com`.
 
 The foundation is the typical one from `~/code/application-concierge/cloudfoundry-platform-installer` (`api.cf.applicationconcierge.com`), and the apps live in the org `developer-advocacy`, space `production`.

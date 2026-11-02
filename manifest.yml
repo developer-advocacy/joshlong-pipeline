@@ -4,20 +4,25 @@
 # the secrets and digests bin/deploy.sh writes to a temporary one. nothing secret belongs here.
 applications:
 
-  # the vue spa, served by nginx. the api's address is baked into the bundle when it's built.
+  # the nuxt site: node.js, rendering each page on the server from what the api says, so search
+  # engines and link previews see the content. it redirects www and the apps-domain route to
+  # ((domain)). /healthz doesn't touch the api, so a slow api can't get the site restarted.
   - name: joshlong-site
     docker:
       image: ((registry))/joshlong-site@((joshlong-site-digest))
       username: _json_key
     instances: 1
-    memory: 256M
+    memory: 512M
     disk_quota: 1G
     routes:
       - route: ((domain))
       - route: www.((domain))
       - route: ((site-host)).((apps-domain))
     health-check-type: http
-    health-check-http-endpoint: /
+    health-check-http-endpoint: /healthz
+    env:
+      NUXT_API_ROOT: ((api-server-uri))
+      NUXT_PUBLIC_SITE_URL: https://((domain))
 
   # the graphql api behind the site: a graalvm native image. it clones the content repository and
   # indexes it with lucene, on local disk, after it starts, and keeps the youtube data in postgres.
