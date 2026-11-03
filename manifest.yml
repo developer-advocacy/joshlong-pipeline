@@ -44,7 +44,8 @@ applications:
       SERVER_PORT: "8080"
       BLOG_RESET_ON_REBUILD: "true"
       BLOG_API_SERVER_URI: ((api-server-uri))
-      BOOTIFUL_BATCH_RUN: "false"
+      # ingests the youtube channels into postgres at startup and every twelve hours.
+      BOOTIFUL_BATCH_RUN: "true"
       SPRING_DATASOURCE_URL: jdbc:postgresql://((JOSHLONG_DB_HOST))/((JOSHLONG_DB_SCHEMA))
       SPRING_DATASOURCE_USERNAME: ((JOSHLONG_DB_USERNAME))
       SPRING_DATASOURCE_PASSWORD: ((JOSHLONG_DB_PASSWORD))

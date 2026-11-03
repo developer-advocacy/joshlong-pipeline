@@ -54,7 +54,7 @@ bin/deploy.sh                      # every app, or name some: bin/deploy.sh josh
 | `CF_USERNAME`, `CF_PASSWORD` | this repository | the CF user `josh` on mypaas, OrgManager of `developer-advocacy` and SpaceDeveloper in `developer-advocacy` / `production` | |
 | `CF_DOCKER_PASSWORD` | this repository | a JSON key of the service account `joshlong-cf-puller@joshlong.iam.gserviceaccount.com`, which can only read `developer-advocacy-artifact-registry` | `joshlong-cf-image-puller-key` (notes) |
 | `JOSHLONG_DB_HOST`, `JOSHLONG_DB_SCHEMA`, `JOSHLONG_DB_USERNAME`, `JOSHLONG_DB_PASSWORD` | the `developer-advocacy` org | the api's PostgreSQL, on Crunchy Bridge | `joshlong-production-secrets` (fields) |
-| `BOOTIFUL_YOUTUBE_API_KEY`, `BOOTIFUL_PROMOTION_PLAYLIST_IDS` | the `developer-advocacy` org | the api's YouTube Data API key, and the playlists it promotes | `joshlong-production-secrets` (fields) |
+| `BOOTIFUL_YOUTUBE_API_KEY`, `BOOTIFUL_PROMOTION_PLAYLIST_IDS` | the `developer-advocacy` org; the key is also a secret of this repository, which wins over the org's | the api's YouTube Data API key (the GCP key `joshlong-api youtube ingest` in project `joshlong`, restricted to the YouTube Data API), and the playlists it promotes | `joshlong-production-secrets` (fields) |
 | `BLOG_INDEX_REBUILD_KEY` | the `developer-advocacy` org | the key the content repository's webhook sends to make the api rebuild its index | `joshlong-production-secrets` (fields) |
 | `GCLOUD_SA_KEY` | the `developer-advocacy` org | the account that pushes images, used here to read their digests | |
 | `JOSHLONG_GITHUB_PERSONAL_ACCESS_TOKEN` | each app repository | a token that can send the dispatch to this repository | `mogul-github-pat` |
