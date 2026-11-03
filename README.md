@@ -29,7 +29,6 @@ bin/deploy.sh                      # every app, or name some: bin/deploy.sh josh
 
 `bin/deploy.sh` pins each app's `:latest` to its current digest, and runs `cf push --strategy rolling` for each app named, into the org and space the vars file names.
 `vars/mypaas.yml` is the default; `--vars vars/<foundation>.yml` names another.
-`vars/typical.yml` is the earlier foundation on GKE (`api.cf.applicationconcierge.com`), until it is gone.
 
 ## Files
 
@@ -37,10 +36,8 @@ bin/deploy.sh                      # every app, or name some: bin/deploy.sh josh
 |---|---|
 | `manifest.yml` | every app; every value that differs by foundation, and every secret, is a `((var))` |
 | `vars/mypaas.yml` | the foundation's API, and the org, space, registry, domains and hosts, for mypaas; no secrets |
-| `vars/typical.yml` | the same for the earlier foundation on GKE |
 | `bin/deploy.sh` | checks the secrets, resolves digests, targets the org and space, pushes |
 | `bin/env-from-bitwarden.sh` | sourced, exports the api's secrets from the Bitwarden note `joshlong-production-secrets` |
-| `bin/secrets-to-bitwarden.sh` | copied the api's secrets from GKE into that note, while GKE still had them |
 | `.github/workflows/deploy-to-production.yaml` | the GitHub Actions deployment |
 
 ## Adding an app
